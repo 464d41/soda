@@ -15,4 +15,6 @@ RUN pip install -r requirements.txt
 
 ADD . .
 
-CMD ["python", "soda-docker.py"]
+CMD ["python", "soda-docker.py", "--help"]
+
+ENTRYPOINT ["python", "soda-docker.py"]

@@ -62,19 +62,19 @@ if __name__ == "__main__":
   
   CONF_PATH = 'soda.yml'
 
-  parser = argparse.ArgumentParser(description='Wrapper to launch DDoS attacks')
+  parser = argparse.ArgumentParser(description='Tool for automated launch of DDoS attacks')
   parser.add_argument('-c','--conf', help='Path to config file', type=str, default=CONF_PATH)
-  parser.add_argument('-p','--type', help='Pattern of launching attacks', type=str, default='rotate')
   parser.add_argument('-i','--interval', help='Attack rotation interval', type=int, default=60)
-  parser.add_argument('-t','--threads', help='Number of threads', type=int, default=1)
-  parser.add_argument('-n','--network', help='Network to put containers to', type=str)
-  parser.add_argument('destination', help='Attack destination', type=str)
+  parser.add_argument('-n','--network', help='Docker Network to put containers to', type=str)
+  parser.add_argument('-p','--pattern', help='Pattern of launching attacks', type=str, default='rotate')
+  parser.add_argument('-t','--threads', help='Number of attack generation tool threads', type=int, default=1)
+  parser.add_argument('destination', help='Attack destination IP', type=str)
 
   args, unknown = parser.parse_known_args()
 
   conf = read_conf(CONF_PATH)
 
-if args.type == 'rotate':
+if args.pattern == 'rotate':
   containers = []
   signal.signal(signal.SIGINT, signal_handler)
   client = docker.from_env()
