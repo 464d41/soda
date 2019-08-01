@@ -48,3 +48,8 @@ attacks:
       - "-p 80"
       - "-d 64"
       - "--flood"
+  - type: "HTTP Flood"
+    tool: "ab"
+    flags:
+      - "-c 100"
+      - "-n 99999999"
