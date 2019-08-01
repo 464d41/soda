@@ -1,5 +1,4 @@
 # Simulation of DDoS Attacks
-SODA framework allows to launch any kind of DDoS attacks to discover your application weaknesses or evaluate DDoS protection device configuration.
 ## Description
 SODA wraps up together multiple traffic generation tools to symplify and unify DoS protection testing. It allows to send any kind DoS attack by specifying its name without figuring out flags for particular traffic generation tool.
 Such approach also allows to standardize DoS posture testing because attack patterns are repeatable..
