@@ -6,7 +6,7 @@ Such approach also allows to standardize DoS posture testing because attack patt
 - Large list of predefined DoS attacks
 - Sends single attack vector or morphs vector with predefined pattern and interval
 - Automatically scales particular attack tool to multiple CPU cores
-# Usage
+## Usage
 1. Build SODA image
 ```
 attacker@host$ docker build -t . soda
