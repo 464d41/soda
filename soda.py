@@ -96,6 +96,7 @@ class Target_Service():
         self.url = url
         self.scheme = parsed_url.scheme
         self.host = parsed_url.netloc
+        self.port = parsed_url.port
         self.path = parsed_url.path
 
 
@@ -116,6 +117,11 @@ class Attack():
             for flag in self.flags:
                 flag = flag.split()
                 flags += flag
+        if self.tool == 'hping3':
+            p = '-p'
+            if p not in self.flags:
+                index = self.flags.index(p)
+                self.flags[index+1] = self.target_service.port
         return flags
 
     def command(self):

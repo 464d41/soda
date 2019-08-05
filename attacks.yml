@@ -46,6 +46,12 @@
     - "-p 80"
     - "-d 64"
     - "--flood"
+- name: "TCP RST Flood"
+  tool: "hping3"
+  flags:
+    - "-R"
+    - "-p 80"
+    - "--flood"
 - name: "HTTP Flood"
   tool: "ab"
   flags:
