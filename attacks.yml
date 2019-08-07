@@ -2,7 +2,6 @@
   tool: "hping3"
   flags:
     - "-S"
-    - "-p 80"
     - "--flood"
 - name: "NTP Flood"
   tool: "hping3"
@@ -16,7 +15,6 @@
   tool: "hping3"
   flags:
     - "-SA"
-    - "-p 80"
     - "--flood"
 - name: "NTP Non-standard Port Flood"
   tool: "hping3"
@@ -30,20 +28,17 @@
   tool: "hping3"
   flags:
     - "-S"
-    - "-p 80"
     - "-M 0"
     - "--flood"
 - name: "TCP ACK Flood"
   tool: "hping3"
   flags:
     - "-A"
-    - "-p 80"
     - "--flood"
 - name: "TCP PUSH/ACK Flood"
   tool: "hping3"
   flags:
     - "-PA"
-    - "-p 80"
     - "-d 64"
     - "--flood"
 - name: "TCP RST Flood"

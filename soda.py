@@ -46,7 +46,6 @@ class Soda():
                                             self.target_service))
 
     def create_worker_container(self, attack):
-        self.client.images.pull(attack.image)
         if self.network:
             container = self.client.containers.create(attack.image,
                                                       attack.command(),
@@ -64,8 +63,11 @@ class Soda():
             container = self.create_worker_container(attack)
             self.containers.append(container)
             container.start()
-            time.sleep(self.interval)
-            print('%s ATTACK STOP: %s' % (datetime.now(), attack.name))
+        time.sleep(self.interval)
+        print('%s ATTACK STOP: %s' % (datetime.now(), attack.name))
+        for container in self.containers:
+            container.remove(force=True)
+        self.containers.clear()
 
     def launch_rotating_attacks(self):
         for attack in cycle(self.attacks_pool):
@@ -95,7 +97,7 @@ class Target_Service():
         parsed_url = urlparse(url)
         self.url = url
         self.scheme = parsed_url.scheme
-        self.host = parsed_url.netloc
+        self.host = parsed_url.hostname
         self.port = parsed_url.port
         self.path = parsed_url.path
 
@@ -111,28 +113,24 @@ class Attack():
         elif self.tool == 'ab':
             self.image = 'jordi/ab'
 
-    def flags(self):
+    def _flags(self):
         flags = []
         if type(self.flags) == list:
             for flag in self.flags:
                 flag = flag.split()
                 flags += flag
-        if self.tool == 'hping3':
-            p = '-p'
-            if p not in self.flags:
-                index = self.flags.index(p)
-                self.flags[index+1] = self.target_service.port
+            if self.tool == 'hping3' and '-p' not in flags:
+                flags.append('-p')
+                flags.append(str(self.target_service.port))
         return flags
 
     def command(self):
         command = []
         if self.tool == 'hping3':
-            command += [self.tool]
-            command += self.flags
+            command += self._flags()
             command += [self.target_service.host]
         if self.tool == 'ab':
-            command += [self.tool]
-            command += self.flags
+            command += self._flags()
             command += [self.target_service.url]
         return ' '.join(command)
 
