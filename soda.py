@@ -145,7 +145,8 @@ def main():
                               multiple attacks',
                         nargs='+', type=int)
     parser.add_argument('-n', '--network',
-                        help='Docker Network to put containers to', type=str)
+                        help='Docker Network to put containers to', type=str,
+                        default=None)
     parser.add_argument('-m', '--mode',
                         help='Attack mode static/rotate',
                         type=str, default='static')
@@ -178,6 +179,8 @@ def main():
     soda.threads = args.threads
 
     soda.interval = args.interval
+
+    soda.network = args.network
 
     if args.mode == 'static':
         soda.launch_static_attack()
