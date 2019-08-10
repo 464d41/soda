@@ -34,3 +34,5 @@ attacker@host$ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock 
 ^CKilling all running containers...
 goofy_keldysh
 ```
+### Example of on-prem lab to test DDoS protection device
+[Link](https://github.com/KEN-Ver1/soda-lab)
