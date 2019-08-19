@@ -47,6 +47,11 @@
     - "-R"
     - "-p 80"
     - "--flood"
+- name: "No L4 Headers Flood"
+  tool: "hping3"
+  flags:
+    - "-0"
+    - "--flood"
 - name: "HTTP Flood"
   tool: "ab"
   flags:
